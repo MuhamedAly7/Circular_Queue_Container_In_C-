@@ -1,0 +1,45 @@
+@startuml pushback
+
+start
+
+:update tail(m_tail++);
+    note
+    any checking
+    ----
+    - what happens if tail exceed total size?
+    - what happens if tail reach to the head and there is data in container ==> need to update head
+    endnote
+    if(m_tail >= totalSize) then
+    :m_tail = 0;
+    endif
+
+    if(m_tail == m_head && size > 0) then
+    :update_head;
+        note
+        any checking
+        ----
+        - what happen if head exceed size?
+        endnote
+        if(m_head > totalsize) then
+        :head=0;
+        endif
+    endif
+:update container m_container[m_tail] = value;
+    note
+    any checking
+    ----
+    - what happens if the index will be not correct start->-1
+    endnote
+:update tail (m_tail++);
+:update currentsize++;
+    note
+    any checking
+    ----
+    - what happens if current size exceed total size
+    endnote
+    if(currentsize > totalsize)then
+    :currentsize=totalSize;
+    endif
+end
+
+@enduml

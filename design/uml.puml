@@ -1,0 +1,17 @@
+@startuml circularBuffer
+
+class CircularBuffer{
+- m_head:uint32_t
+- m_tail:uint32_t
+- m_currentsize:uint32_t
+- m_container:std::array<T,totalsize>
+--------
++ push_back(T value):void
++ pop():void
++ head():T const&
++ tail():T const&
++ getsize():uint32_t
++ empty():bool
+}
+
+@enduml

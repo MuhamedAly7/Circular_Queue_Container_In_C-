@@ -20,7 +20,7 @@ start
         ----
         - what happen if head exceed size?
         endnote
-        if(m_head > totalsize) then
+        if(m_head >= totalsize) then
         :head=0;
         endif
     endif

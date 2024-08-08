@@ -1,0 +1,21 @@
+@startuml POP
+
+start
+
+:update head;
+    note
+    any checking
+    ----
+    - what happens if current size is zero-> throw
+    - what heppens if current size equals to one-> current_size--
+    - what happens if head exceed total size
+    end note
+:update current size;
+    note
+    any checking
+    ----
+    - what happens if current size exceed total size
+    end note
+end;
+
+@enduml

@@ -16,3 +16,10 @@ ${CMAKE_SOURCE_DIR}/src/
 gtest_discover_tests(${PROJECT_NAME})
 
 ## code coverage
+set(CMAKE_CXX_FLAGS "-g -O0 -ftest-coverage -fprofile-arcs")
+
+add_custom_target(coverage 
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${CMAKE_COMMAND} -E
+    rm -rf report && mkdir report && gcovr -r "${CMAKE_SOURCE_DIR}" --html --html-details -o coverage.html
+)

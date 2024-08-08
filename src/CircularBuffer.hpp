@@ -2,6 +2,7 @@
 #define _CIRCULARBUFFER_H_
 #include <array>
 #include <cstdint>
+#include <initializer_list>
 #include <stdexcept>
 
 template <typename T, uint32_t SIZE>
@@ -9,6 +10,19 @@ class CircularBuffer
 {
 public:
     CircularBuffer() : m_head(0), m_tail(0), m_currentsize(0){}
+    CircularBuffer(const std::initializer_list<T> &values) : m_head(0), m_tail(0), m_currentsize(0)
+    {
+        if(values.size() > SIZE)
+        {
+            throw std::runtime_error("size is not valid");
+        }
+        for(uint32_t i = 0; i < values.size(); i++)
+        {
+            m_container[i] = *(values.begin() + i);
+        }
+        m_tail = values.size() - 1;
+        m_currentsize = values.size();
+    }
     void push_back(T value)
     {
         // update container

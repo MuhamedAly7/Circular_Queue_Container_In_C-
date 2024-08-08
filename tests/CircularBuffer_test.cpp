@@ -1,4 +1,5 @@
 #include "CircularBuffer.hpp"
+#include <array>
 #include <stdexcept>
 #include <vector>
 #include <gtest/gtest.h>
@@ -113,4 +114,36 @@ TEST_F(CircularBuffer_test, TEST_PUSHBACK_BACK_POP_OVERPOP_THROW_2)
 {
     CircularBuffer<int, 5>buffer;
     EXPECT_THROW(buffer.pop(), std::runtime_error);
+}
+
+
+TEST_F(CircularBuffer_test, TEST_INITIALIZER_LIST)
+{
+    CircularBuffer<int, 5>buffer{6, 7, 8, 9, 10};
+    std::vector<int> Expected_res{6, 7, 8, 9, 10};
+    std::vector<int>result;
+    
+    EXPECT_EQ(buffer.getsize(), Expected_res.size());
+    while(!buffer.empty())
+    {
+        result.push_back(buffer.head());
+        buffer.pop();
+    }
+    
+    EXPECT_EQ(result, Expected_res);
+}
+
+
+
+TEST_F(CircularBuffer_test, TEST_INITIALIZER_LIST_THROW)
+{
+    try
+    {
+        CircularBuffer<int, 5>buffer{6, 7, 8, 9, 10, 11};
+        EXPECT_TRUE(false);
+    }
+    catch (const std::runtime_error& e)
+    {
+        EXPECT_TRUE(true);
+    }   
 }
